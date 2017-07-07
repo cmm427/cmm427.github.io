@@ -93,15 +93,16 @@
 
 
 
-<meta name="description" content="appium">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Mingming.Cui">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="Monkey 简介Monkey 是一个可以运行于模拟器或者真机的命令行工具，通过 Monkey 工具模拟用户触摸、手势和系统级别等伪随机操作，我们可以对 APP 进行压力测试。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android压力测试工具Monkey">
+<meta property="og:url" content="http://yoursite.com/2017/07/07/Android压力测试工具Monkey/index.html">
 <meta property="og:site_name" content="Mingming.Cui">
-<meta property="og:description" content="appium">
+<meta property="og:description" content="Monkey 简介Monkey 是一个可以运行于模拟器或者真机的命令行工具，通过 Monkey 工具模拟用户触摸、手势和系统级别等伪随机操作，我们可以对 APP 进行压力测试。">
+<meta property="og:updated_time" content="2017-07-07T07:25:42.842Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mingming.Cui">
-<meta name="twitter:description" content="appium">
+<meta name="twitter:title" content="Android压力测试工具Monkey">
+<meta name="twitter:description" content="Monkey 简介Monkey 是一个可以运行于模拟器或者真机的命令行工具，通过 Monkey 工具模拟用户触摸、手势和系统级别等伪随机操作，我们可以对 APP 进行压力测试。">
 
 
 
@@ -129,13 +130,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/07/07/Android压力测试工具Monkey/"/>
 
 
 
 
 
-  <title>Mingming.Cui</title>
+  <title>Android压力测试工具Monkey | Mingming.Cui</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -161,9 +162,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-   page-home 
- ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -256,9 +255,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -284,9 +283,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/07/07/Android压力测试工具Monkey/" itemprop="url">Android压力测试工具Monkey</a></h2>
+          <h2 class="post-title" itemprop="name headline">Android压力测试工具Monkey</h2>
         
 
         <div class="post-meta">
@@ -355,28 +352,45 @@
       
 
       
+        <h2 id="Monkey-简介"><a href="#Monkey-简介" class="headerlink" title="Monkey 简介"></a>Monkey 简介</h2><p>Monkey 是一个可以运行于模拟器或者真机的命令行工具，通过 Monkey 工具模拟用户触摸、手势和系统级别等伪随机操作，我们可以对 APP 进行压力测试。<br><a id="more"></a></p>
+<h2 id="Monkey-options"><a href="#Monkey-options" class="headerlink" title="Monkey options"></a>Monkey options</h2><p>Monkey 包含一系列 options，可以把它们归为以下四类：</p>
+<ol>
+<li>基本配置项，比如设置事件数</li>
+<li>操作约束，比如只对特定应用包执行测试</li>
+<li>事件类型和百分比，比如设置伪随机的种子值</li>
+<li>调试项，比如忽略 crash</li>
+</ol>
+<h2 id="如何使用-Monkey"><a href="#如何使用-Monkey" class="headerlink" title="如何使用 Monkey"></a>如何使用 Monkey</h2><h3 id="基本语法格式如下"><a href="#基本语法格式如下" class="headerlink" title="基本语法格式如下"></a>基本语法格式如下</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ adb shell monkey [options] &lt;event-count&gt;</div></pre></td></tr></table></figure>
+<p>以 oschina 客户端为测试对象，发送100次事件，命令格式如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ adb shell monkey -p net.oschina.app 100</div></pre></td></tr></table></figure></p>
+<p>若执行后，出现 injection failed，可以<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ adb root</div><div class="line">$ adb shell monkey -p net.oschina.app 100</div></pre></td></tr></table></figure></p>
+<h3 id="参数-s"><a href="#参数-s" class="headerlink" title="参数 -s "></a>参数 -s <seed></seed></h3><p>当做压测的时候，APP 出现异常，如何去复现问题呢？Monkey 发送的都是随机事件，如何保证每次执行都是相同的呢？指定相同的 seed 可以满足，伪随机事件的缘由也在此<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ adb shell monkey -p net.oschina.app -s 427 100</div></pre></td></tr></table></figure></p>
+<h3 id="参数-–throttle"><a href="#参数-–throttle" class="headerlink" title="参数 –throttle "></a>参数 –throttle <milliseconds></milliseconds></h3><p>不指定此参数，事件之间没有延迟，你会发现指令很快执行完毕。throttle 可以指定一个固定的时间间隔，单位是毫秒<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ adb shell monkey -p net.oschina.app -s 427 --throttle 500 100</div></pre></td></tr></table></figure></p>
+<h3 id="参数-–pct-touch"><a href="#参数-–pct-touch" class="headerlink" title="参数 –pct-touch "></a>参数 –pct-touch <percent></percent></h3><p>设置 touch 事件在整个执行过程的比例，最大值为100，表示全部执行 touch 事件<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ adb shell monkey -p net.oschina.app -s 427 --throttle 500 --pct-touch 80 100</div></pre></td></tr></table></figure></p>
+<p>–pct-motion, –pct-trackball, –pct-nav, –pct-majornav, –pct-syskeys, –pct-appswitch 和 –pct-anyevent 的用法也一样，但是配置的时候要保证 percent 的和不能超过100</p>
+<h3 id="参数-–ignore-crashes"><a href="#参数-–ignore-crashes" class="headerlink" title="参数 –ignore-crashes"></a>参数 –ignore-crashes</h3><p>测试的过程中经常会遇到 APP crash 掉或者出现其它异常情况，这个时候想继续执行未完成的事件，就可以加上此参数<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ adb shell monkey -p net.oschina.app -s 427 --throttle 500 --pct-touch 80 --ignore-crashes 100</div></pre></td></tr></table></figure></p>
+<p>–ignore-timeouts 是另外一个常用配置，比如出现 ANR 的时候想继续下去，就可以加上此参数。</p>
+
+      
+    </div>
+
+    <div>
+      
         
-          <h2 id="Monkey-简介"><a href="#Monkey-简介" class="headerlink" title="Monkey 简介"></a>Monkey 简介</h2><p>Monkey 是一个可以运行于模拟器或者真机的命令行工具，通过 Monkey 工具模拟用户触摸、手势和系统级别等伪随机操作，我们可以对 APP 进行压力测试。<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/07/07/Android压力测试工具Monkey/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+
+      
+    </div>
+
+    <div>
+      
         
+
       
     </div>
 
     <div>
       
-    </div>
+        
 
-    <div>
-      
-    </div>
-
-    <div>
       
     </div>
 
@@ -384,295 +398,38 @@
       
 
       
-
-      
-
       
       
-        <div class="post-eof"></div>
+
       
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/26/获取toast/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="cmm427">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Mingming.Cui">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/06/26/获取toast/" itemprop="url">获取toast</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-26T10:48:23+08:00">
-                2017-06-26
-              </time>
+              <a href="/2017/06/26/获取toast/" rel="next" title="获取toast">
+                <i class="fa fa-chevron-left"></i> 获取toast
+              </a>
             
+          </div>
 
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
             
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/appium/" itemprop="url" rel="index">
-                    <span itemprop="name">appium</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <h2 id="1-前提条件"><a href="#1-前提条件" class="headerlink" title="1. 前提条件"></a>1. 前提条件</h2><p>1.1 Appium 版本要求 1.6.3 及以上<br>1.2 java-client 版本要求 5.0.0 及以上<br>1.3 Android 5.0 (API Level 20) 及以上才支持 <a href="https://nishantverma.gitbooks.io/appium-for-android/content/appium/appium_160.html" target="_blank" rel="external">UiAutomator 2</a></p>
-<h2 id="2-关键代码"><a href="#2-关键代码" class="headerlink" title="2. 关键代码"></a>2. 关键代码</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.ANDROID_UIAUTOMATOR2);</div><div class="line"></div><div class="line">WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(<span class="string">"//*[@text='Your Toast Message']"</span>)));</div><div class="line">Assert.assertNotNull(element);</div></pre></td></tr></table></figure>
-<h2 id="3-其他"><a href="#3-其他" class="headerlink" title="3. 其他"></a>3. 其他</h2><p>成功获取了英文 toast，中文的还没测试成功</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </article>
 
 
-    
-      
 
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/08/安装Appium/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="cmm427">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Mingming.Cui">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/06/08/安装Appium/" itemprop="url">安装Appium</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-08T14:18:08+08:00">
-                2017-06-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/appium/" itemprop="url" rel="index">
-                    <span itemprop="name">appium</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="1-安装依赖"><a href="#1-安装依赖" class="headerlink" title="1. 安装依赖"></a>1. 安装依赖</h2><p>操作系统版本 ubuntu 16.04 LTS， 64-bit<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/06/08/安装Appium/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+    <div class="post-spread">
       
     </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-  </section>
-
-  
+  </div>
 
 
           </div>
@@ -680,6 +437,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -699,8 +460,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -764,6 +534,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Monkey-简介"><span class="nav-text">Monkey 简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Monkey-options"><span class="nav-text">Monkey options</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何使用-Monkey"><span class="nav-text">如何使用 Monkey</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本语法格式如下"><span class="nav-text">基本语法格式如下</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参数-s"><span class="nav-text">参数 -s </span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参数-–throttle"><span class="nav-text">参数 –throttle </span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参数-–pct-touch"><span class="nav-text">参数 –pct-touch </span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参数-–ignore-crashes"><span class="nav-text">参数 –ignore-crashes</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -877,10 +663,10 @@
   
 
   
-    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
 <script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
 
-  
+
 
   
 
