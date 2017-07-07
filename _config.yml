@@ -47,7 +47,8 @@ highlight:
 default_category: uncategorized
 category_map: 
   - appium
-  - java 
+  - java
+  - monkey 
 tag_map:
 
 # Date / Time format
